@@ -2,19 +2,19 @@ import { supabase } from "./supabase.js";
 
 const sessionInput = document.getElementById("sessionInput");
 const userInput = document.getElementById("userInput");
-const voteInput = document.getElementById("voteInput");
+const estimateInput = document.getElementById("estimateInput");
 const result = document.getElementById("result");
 const countdownEl = document.getElementById("countdown");
 
 document.getElementById("voteBtn").onclick = async () => {
   await supabase.from("votes").insert([
     {
-      session_id: sessionInput.value,
-      user_id: userInput.value,
-      vote: Number(voteInput.value)
+      task_id: sessionInput.value,
+      user_name: userInput.value,
+      estimate: Number(estimateInput.value)
     }
   ]);
-  voteInput.value = "";
+  estimateInput.value = "";
 };
 
 document.getElementById("revealBtn").onclick = async () => {
@@ -34,7 +34,7 @@ async function revealAverage() {
   const { data } = await supabase
     .from("votes")
     .select("vote")
-    .eq("session_id", sessionInput.value);
+    .eq("task_id", sessionInput.value);
   if (data && data.length) {
     const avg = data.reduce((acc, curr) => acc + curr.vote, 0) / data.length;
     result.textContent = `Average vote: ${avg.toFixed(2)}h`;
