@@ -1,4 +1,3 @@
-// ...no existing code...
 const { createClient } = window.supabase;
 
 const supabaseUrl = "https://fwcagnhqsovrrbkhuuba.supabase.co";

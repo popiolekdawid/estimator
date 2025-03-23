@@ -1,4 +1,3 @@
-// ...no existing code...
 import { supabase } from "./supabase.js";
 
 const sessionInput = document.getElementById("sessionInput");
