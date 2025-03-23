@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Voting Platform</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.0"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Team Voting Platform</h1>
+        
+        <!-- Step 1: Create/Join Session -->
+        <div id="sessionSetup" class="card">
+            <h2>Setup Voting Session</h2>
+            <div class="form-group">
+                <label for="sessionName">Session Name:</label>
+                <input type="text" id="sessionName" placeholder="Enter a unique session name">
+            </div>
+            
+            <div class="form-group">
+                <label for="voterCount">Number of Voters (2-8):</label>
+                <input type="number" id="voterCount" min="2" max="8" value="3">
+            </div>
+
+            <div class="form-group">
+                <label for="userName">Your Name:</label>
+                <input type="text" id="userName" placeholder="Enter your name">
+            </div>
+            
+            <div class="buttons-row">
+                <button id="createSessionBtn">Create Session</button>
+                <button id="joinSessionBtn">Join Existing Session</button>
+            </div>
+
+            <div id="sessionList" class="session-list" style="display: none;">
+                <h3>Available Sessions</h3>
+                <ul id="activeSessions"></ul>
+            </div>
+        </div>
+
+        <!-- Step 2: Vote -->
+        <div id="votingSection" class="card" style="display: none;">
+            <h2>Cast Your Vote</h2>
+            <div id="sessionInfo" class="session-info">
+                <p>Session: <span id="currentSessionName"></span></p>
+                <p>Voters: <span id="votersSubmitted">0</span> / <span id="totalVoters">0</span></p>
+            </div>
+            
+            <div class="voting-buttons">
+                <button class="vote-btn" data-value="1">1</button>
+                <button class="vote-btn" data-value="2">2</button>
+                <button class="vote-btn" data-value="3">3</button>
+                <button class="vote-btn" data-value="5">5</button>
+                <button class="vote-btn" data-value="8">8</button>
+                <button class="vote-btn" data-value="13">13</button>
+                <button class="vote-btn" data-value="21">21</button>
+            </div>
+            
+            <div class="form-group">
+                <label for="customVote">Custom vote:</label>
+                <input type="number" id="customVote" min="1" placeholder="Enter a number">
+                <button id="submitCustomBtn">Submit Custom Vote</button>
+            </div>
+            
+            <div class="voter-list">
+                <h3>Team Members</h3>
+                <ul id="voterList"></ul>
+            </div>
+        </div>
+
+        <!-- Step 3: Results -->
+        <div id="resultsSection" class="card" style="display: none;">
+            <h2>Voting Results</h2>
+            <div class="results">
+                <div class="big-result">
+                    <h3>Average Vote</h3>
+                    <div id="averageResult" class="average-value">0</div>
+                </div>
+                
+                <div class="detailed-results">
+                    <h3>Individual Votes</h3>
+                    <ul id="individualVotes"></ul>
+                </div>
+            </div>
+            
+            <button id="newSessionBtn" class="action-btn">Start New Session</button>
+        </div>
+        
+        <!-- Status messages -->
+        <div id="statusMessage" class="status-message"></div>
+    </div>
+    
+    <script src="voting-app.js"></script>
+</body>
+</html>
