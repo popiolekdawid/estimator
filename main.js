@@ -31,13 +31,13 @@ document.getElementById("revealBtn").onclick = async () => {
 };
 
 async function revealAverage() {
-  const { data } = await supabase
-    .from("votes")
-    .select("estimate")
-    .eq("task_id", taskId.value);
-  if (data && data.length) {
-    const avg = data.reduce((acc, curr) => acc + curr.vote, 0) / data.length;
-    result.textContent = `Average vote: ${avg.toFixed(2)}h`;
-  }
-  countdownEl.textContent = "";
+    const { data } = await supabase
+        .from("votes")
+        .select("estimate")
+        .eq("task_id", taskId.value);
+    if (data && data.length) {
+        const avg = data.reduce((acc, curr) => acc + curr.estimate, 0) / data.length;
+        result.textContent = `Average vote: ${avg.toFixed(2)}h`;
+    }
+    countdownEl.textContent = "";
 }
