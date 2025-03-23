@@ -30,13 +30,34 @@ document.getElementById("revealBtn").onclick = async () => {
   }, 1000);
 };
 
+function weightedEstimate(estimates) {
+    // Step 1: Find the median
+    const sorted = [...estimates].sort((a, b) => a - b);
+    const mid = Math.floor(sorted.length / 2);
+    const median = sorted.length % 2 === 0
+        ? (sorted[mid - 1] + sorted[mid]) / 2
+        : sorted[mid];
+
+    // Step 2: Calculate weights (inverse of distance from median, with a minimum cap)
+    const weights = estimates.map(e => {
+        const distance = Math.abs(e - median);
+        return distance === 0 ? 2 : 1 / (distance + 1); // Avoid division by zero, prioritize median values
+    });
+
+    // Step 3: Compute weighted average
+    const weightedSum = estimates.reduce((sum, e, i) => sum + e * weights[i], 0);
+    const totalWeight = weights.reduce((sum, w) => sum + w, 0);
+
+    return weightedSum / totalWeight;
+}
+
 async function revealAverage() {
     const { data } = await supabase
         .from("votes")
         .select("estimate")
         .eq("task_id", taskId.value);
     if (data && data.length) {
-        const avg = data.reduce((acc, curr) => acc + curr.estimate, 0) / data.length;
+        const avg = weightedEstimate(data);
         result.textContent = `Average vote: ${avg.toFixed(2)}h`;
     }
     countdownEl.textContent = "";
