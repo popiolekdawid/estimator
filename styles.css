@@ -1,0 +1,45 @@
+/* input prefix */
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-box {
+    display: flex;
+    align-items: center;
+    max-width: 300px;
+    background: #fff;
+    border: 1px solid #a0a0a0;
+    border-radius: 4px;
+    padding-left: 0.5rem;
+    overflow: hidden;
+    font-family: sans-serif;
+}
+
+.input-box .prefix {
+    font-weight: 300;
+    font-size: 14px;
+    color: #999;
+}
+
+.input-box input {
+    flex-grow: 1;
+    font-size: 14px;
+    background: #fff;
+    border: none;
+    outline: none;
+    padding: 0.5rem;
+}
+
+.input-box:focus-within {
+    border-color: #777;
+}

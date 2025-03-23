@@ -1,7 +1,7 @@
 import { supabase } from "./supabase.js";
 
-const sessionInput = document.getElementById("sessionInput");
-const userInput = document.getElementById("userInput");
+const taskId = document.getElementById("taskId");
+const userNameInput = document.getElementById("userNameInput");
 const estimateInput = document.getElementById("estimateInput");
 const result = document.getElementById("result");
 const countdownEl = document.getElementById("countdown");
@@ -9,8 +9,8 @@ const countdownEl = document.getElementById("countdown");
 document.getElementById("voteBtn").onclick = async () => {
   await supabase.from("votes").insert([
     {
-      task_id: sessionInput.value,
-      user_name: userInput.value,
+      task_id: taskId.value,
+      user_name: userNameInput.value,
       estimate: Number(estimateInput.value)
     }
   ]);
@@ -33,8 +33,8 @@ document.getElementById("revealBtn").onclick = async () => {
 async function revealAverage() {
   const { data } = await supabase
     .from("votes")
-    .select("vote")
-    .eq("task_id", sessionInput.value);
+    .select("estimate")
+    .eq("task_id", taskId.value);
   if (data && data.length) {
     const avg = data.reduce((acc, curr) => acc + curr.vote, 0) / data.length;
     result.textContent = `Average vote: ${avg.toFixed(2)}h`;

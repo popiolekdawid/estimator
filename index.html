@@ -7,9 +7,12 @@
   <body>
     <h1>Estimator</h1>
     <div>
-      <input id="sessionInput" placeholder="Session name" />
-      <input id="userInput" placeholder="User name" />
-      <input id="estimateInput" type="number" min="1" max="72" placeholder="Your vote" />
+    <div class="input-box">
+        <span class="prefix">feature/DEVMI-</span>
+        <input id="taskId" type="number" placeholder="Task id" size={8} required />
+    </div>
+      <input id="userNameInput" placeholder="User name" required />
+      <input id="estimateInput" type="number" min="1" max="72" size={8} placeholder="Your vote" required />
       <button id="voteBtn">Vote</button>
       <button id="revealBtn">Reveal Average</button>
     </div>
