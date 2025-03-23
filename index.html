@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Estimator</title>
+  </head>
+  <body>
+    <h1>Estimator</h1>
+    <div>
+      <input id="sessionInput" placeholder="Session name" />
+      <input id="userInput" placeholder="User name" />
+      <input id="voteInput" type="number" min="1" max="72" placeholder="Your vote" />
+      <button id="voteBtn">Vote</button>
+      <button id="revealBtn">Reveal Average</button>
+    </div>
+    <p id="countdown"></p>
+    <p id="result"></p>
+
+    <script src="supabase.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
