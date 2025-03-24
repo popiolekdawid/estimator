@@ -31,5 +31,5 @@ async function submitForm(event) {
     estimate: estimateValue
   }];
   await supabase.from("votes").insert(entry);
-  window.location.href = `/results.html?taskId=${taskIdValue}`;
+  window.location.href = `results.html?taskId=${taskIdValue}`;
 }
