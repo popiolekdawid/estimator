@@ -6,17 +6,6 @@ const estimate = document.getElementById("estimate");
 const result = document.getElementById("result");
 const countdownEl = document.getElementById("countdown");
 
-document.getElementById("voteBtn").onclick = async () => {
-  const entry = [{
-    task_id: taskId.value,
-      user_name: username.value,
-        estimate: Number(estimate.value)
-  }];
-  console.log(entry)
-  await supabase.from("votes").insert(entry);
-  estimate.value = "";
-};
-
 document.getElementById("revealBtn").onclick = async () => {
   let timer = 3;
   countdownEl.textContent = `Revealing in ${timer}...`;
@@ -71,9 +60,23 @@ function updateHours() {
 }
 window.updateHours = updateHours;
 
-function revealAverage() {
-  const name = document.getElementById('username').value;
-  const estimate = document.getElementById('estimate').value;
-  alert(`Name: ${name || 'N/A'}, Hours: ${estimate}`);
+document.getElementById("estimationForm").addEventListener("submit", submitForm);
+
+async function submitForm(event) {
+  event.preventDefault();
+  const taskIdValue = taskId.value.trim();
+  const usernameValue = username.value.trim();
+  const estimateValue = Number(estimate.value);
+  if (!taskIdValue || !estimateValue) {
+    alert("Please provide the required fields.");
+    return;
+  }
+  const entry = [{
+    task_id: taskIdValue,
+    user_name: usernameValue,
+    estimate: estimateValue
+  }];
+  await supabase.from("votes").insert(entry);
+  // estimate.value = "1";
+  // updateHours();
 }
-window.submitForm = submitForm;

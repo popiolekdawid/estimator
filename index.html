@@ -9,15 +9,17 @@
     <div class="container">
     <h1>Estimator</h1>
     <div>
-    <div class="input-box">
+    <form id="estimationForm">
+      <div class="input-box">
         <span class="prefix">feature/DEVMI-</span>
-        <input id="taskId" type="number" placeholder="Task id" size={8} required />
-    </div>
-      <input id="username" placeholder="Your name (optional)" required />
+        <input id="taskId" type="number" placeholder="Task id" size="8" required />
+      </div>
+      <input id="username" placeholder="Your name (optional)" />
       <input type="range" id="estimate" min="1" max="64" value="1" required oninput="updateHours()">
       <div class="hours-display" id="estimate-display">1 hour</div>
-      <button id="voteBtn">Vote</button>
-      <button id="revealBtn" onclick="revealAverage()">Reveal Average</button>
+      <button type="submit">Vote</button>
+    </form>
+      <button id="revealBtn">Reveal Average</button>
     </div>
     <p id="countdown"></p>
     <p id="result"></p>
