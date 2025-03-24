@@ -1,20 +1,20 @@
 import { supabase } from "./supabase.js";
 
 const taskId = document.getElementById("taskId");
-const userNameInput = document.getElementById("userNameInput");
-const estimateInput = document.getElementById("estimateInput");
+const username = document.getElementById("username");
+const estimate = document.getElementById("estimate");
 const result = document.getElementById("result");
 const countdownEl = document.getElementById("countdown");
 
 document.getElementById("voteBtn").onclick = async () => {
-  await supabase.from("votes").insert([
-    {
-      task_id: taskId.value,
-      user_name: userNameInput.value,
-      estimate: Number(estimateInput.value)
-    }
-  ]);
-  estimateInput.value = "";
+  const entry = [{
+    task_id: taskId.value,
+      user_name: username.value,
+        estimate: Number(estimate.value)
+  }];
+  console.log(entry)
+  await supabase.from("votes").insert(entry);
+  estimate.value = "";
 };
 
 document.getElementById("revealBtn").onclick = async () => {
@@ -62,3 +62,18 @@ async function revealAverage() {
     }
     countdownEl.textContent = "";
 }
+
+function updateHours() {
+  const estimate = document.getElementById('estimate').value;
+  const display = document.getElementById('estimate-display');
+  display.textContent = estimate + ' hour' + (estimate > 1 ? 's' : '');
+  display.style.color = `rgb(${(estimate / 64) * 255}, 50, 50)`;
+}
+window.updateHours = updateHours;
+
+function revealAverage() {
+  const name = document.getElementById('username').value;
+  const estimate = document.getElementById('estimate').value;
+  alert(`Name: ${name || 'N/A'}, Hours: ${estimate}`);
+}
+window.submitForm = submitForm;

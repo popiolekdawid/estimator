@@ -6,19 +6,22 @@
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
+    <div class="container">
     <h1>Estimator</h1>
     <div>
     <div class="input-box">
         <span class="prefix">feature/DEVMI-</span>
         <input id="taskId" type="number" placeholder="Task id" size={8} required />
     </div>
-      <input id="userNameInput" placeholder="User name" required />
-      <input id="estimateInput" type="number" min="1" max="72" size={8} placeholder="Your vote" required />
+      <input id="username" placeholder="Your name (optional)" required />
+      <input type="range" id="estimate" min="1" max="64" value="1" required oninput="updateHours()">
+      <div class="hours-display" id="estimate-display">1 hour</div>
       <button id="voteBtn">Vote</button>
-      <button id="revealBtn">Reveal Average</button>
+      <button id="revealBtn" onclick="revealAverage()">Reveal Average</button>
     </div>
     <p id="countdown"></p>
     <p id="result"></p>
+  </div>
 
     <script type="module" src="supabase.js"></script>
     <script type="module" src="main.js"></script>
